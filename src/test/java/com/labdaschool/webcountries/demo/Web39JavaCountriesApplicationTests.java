@@ -1,4 +1,4 @@
-package com.labdaschool.web39.demo;
+package com.labdaschool.webcountries.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
