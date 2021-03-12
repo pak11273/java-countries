@@ -59,4 +59,55 @@ public class CountryController
         }
         return new ResponseEntity<>(rtnList, HttpStatus.OK);
     }
+
+    // http://localhost:2019/population/total
+    @GetMapping(value = "/population/total", produces = {"application/json"})
+    public ResponseEntity<?> listTotalPopulation()
+    {
+        List<Country> myList = new ArrayList<>();
+        countryrepos.findAll().iterator().forEachRemaining((myList::add));
+
+        for(Country c : myList)
+        {
+            System.out.println(c);
+        }
+
+        // total of all population
+        double total = 0;
+        for(Country c : myList)
+        {
+            total = total + c.getPopulation();
+            System.out.println(total);
+        }
+
+        return new ResponseEntity<>(myList, HttpStatus.OK);
+    }
+
+    // http://localhost:2019/population/min
+    @GetMapping(value = "/population/min", produces = {"application/json"})
+    public ResponseEntity<?> listPopulationMin()
+    {
+        List<Country> myList = new ArrayList<>();
+        countryrepos.findAll().iterator().forEachRemaining((myList::add));
+
+        for(Country c : myList)
+        {
+            System.out.println(c);
+        }
+        return new ResponseEntity<>(myList, HttpStatus.OK);
+    }
+
+    // http://localhost:2019/population/max
+    @GetMapping(value = "/population/max", produces = {"application/json"})
+    public ResponseEntity<?> listPopulationMax()
+    {
+        List<Country> myList = new ArrayList<>();
+        countryrepos.findAll().iterator().forEachRemaining((myList::add));
+
+        for(Country c : myList)
+        {
+            System.out.println(c);
+        }
+        return new ResponseEntity<>(myList, HttpStatus.OK);
+    }
 }
