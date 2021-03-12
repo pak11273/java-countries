@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -30,6 +32,8 @@ public class CountryController
 
         return tempList;
     }
+
+
     @Autowired
     CountryRepository countryrepos;
 
@@ -90,11 +94,8 @@ public class CountryController
         List<Country> myList = new ArrayList<>();
         countryrepos.findAll().iterator().forEachRemaining((myList::add));
 
-        for(Country c : myList)
-        {
-            System.out.println(c);
-        }
-        return new ResponseEntity<>(myList, HttpStatus.OK);
+        Country cty = Collections.min(myList, Comparator.comparing(c -> c.getPopulation()));
+        return new ResponseEntity<>(cty.getPopulation(), HttpStatus.OK);
     }
 
     // http://localhost:2019/population/max
@@ -104,10 +105,7 @@ public class CountryController
         List<Country> myList = new ArrayList<>();
         countryrepos.findAll().iterator().forEachRemaining((myList::add));
 
-        for(Country c : myList)
-        {
-            System.out.println(c);
-        }
-        return new ResponseEntity<>(myList, HttpStatus.OK);
+        Country cty = Collections.max(myList, Comparator.comparing(c -> c.getPopulation()));
+        return new ResponseEntity<>(cty.getPopulation(), HttpStatus.OK);
     }
 }
